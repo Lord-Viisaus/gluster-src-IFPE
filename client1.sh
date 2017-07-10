@@ -17,10 +17,10 @@ wget -O - http://download.gluster.org/pub/gluster/glusterfs/3.7/3.7.9/pub.key | 
 echo deb http://download.gluster.org/pub/gluster/glusterfs/3.7/3.7.9/Debian/jessie/apt jessie main > /etc/apt/sources.list.d/gluster.list
 apt-get update
 
+mkdir /Files
+
 # Nas máquinas client1 e client2
 apt-get install glusterfs-client -y
 
-mkdir /files
-
-echo gluster1:/file /glusterfs glusterfs defaults,_netdev,backupvolfile-server=gluster2 0 0 >>/etc/fstab
+echo gluster1:/FilesGluster /Files glusterfs defaults,_netdev,backupvolfile-server=gluster2 0 0 >>/etc/fstab
 mount -a
