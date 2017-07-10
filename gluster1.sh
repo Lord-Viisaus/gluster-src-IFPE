@@ -18,6 +18,8 @@ apt-get update
 
 apt-get install glusterfs-server -y
 
+mkdir /FilesGluster
+
 gluster peer probe gluster2
 
 service glusterfs-server status
