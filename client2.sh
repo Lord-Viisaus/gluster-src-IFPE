@@ -1,10 +1,10 @@
 rm /etc/hostname
 echo client1 >>/etc/hostname
 
-echo 192.168.20.1 gluster1 >>/etc/hosts
-echo 192.168.20.2 gluster2 >>/etc/hosts
-echo 192.168.20.10  client1 >>/etc/hosts
-echo 192.168.20.11  client2 >>/etc/hosts
+echo 192.168.0.1 gluster1 >>/etc/hosts
+echo 192.168.0.2 gluster2 >>/etc/hosts
+echo 192.168.0.10  client1 >>/etc/hosts
+echo 192.168.0.11  client2 >>/etc/hosts
 
 echo '***** INTALANDO ******'
 echo ' '
