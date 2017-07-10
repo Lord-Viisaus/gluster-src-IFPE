@@ -1,3 +1,4 @@
+rm /etc/hostname
 echo gluster2 >>/etc/hostname
 
 echo 192.168.20.1 gluster1 >>/etc/hosts
@@ -17,6 +18,8 @@ echo deb http://download.gluster.org/pub/gluster/glusterfs/3.7/3.7.9/Debian/jess
 apt-get update
 
 apt-get install glusterfs-server -y
+
+mkdir /FilesGluster
 
 gluster peer probe gluster1
 
