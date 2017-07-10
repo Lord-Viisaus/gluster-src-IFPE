@@ -11,8 +11,9 @@ echo ' '
 apt update
 apt install apt-transport-https
 
-wget -O - http://download.gluster.org/pub/gluster/glusterfs/3.7/3.7.9/pub.key | apt-key add -
-echo deb http://download.gluster.org/pub/gluster/glusterfs/3.7/3.7.9/Debian/jessie/apt jessie main > /etc/apt/sources.list.d/gluster.list
+wget -O - http://download.gluster.org/pub/gluster/glusterfs/LATEST/rsa.pub | sudo apt-key add -
+echo deb https://download.gluster.org/pub/gluster/glusterfs/LATEST/Debian/$(lsb_release -sc)/apt $(lsb_release -sc) main | sudo tee /etc/apt/sources.list.d/gluster.list
+
 apt-get update
 
 apt-get install glusterfs-server -y
