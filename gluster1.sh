@@ -1,18 +1,19 @@
+rm /etc/hostname
 echo gluster1 >>/etc/hostname
 
-echo 192.168.20.1 gluster1 >>/etc/hosts
-echo 192.168.20.2 gluster2 >>/etc/hosts
-echo 192.168.20.10 client1 >>/etc/hosts
-echo 192.168.20.11 client2 >>/etc/hosts
+echo 192.168.0.1 gluster1 >>/etc/hosts
+echo 192.168.0.2 gluster2 >>/etc/hosts
+echo 192.168.0.10 client1 >>/etc/hosts
+echo 192.168.0.11 client2 >>/etc/hosts
 
-echo '***** INTALANDO *****'
+echo '***** INSTALANDO *****'
 echo ' '
 
 apt update
 apt install apt-transport-https
 
-wget -O - http://download.gluster.org/pub/gluster/glusterfs/LATEST/rsa.pub | sudo apt-key add -
-echo deb https://download.gluster.org/pub/gluster/glusterfs/LATEST/Debian/$(lsb_release -sc)/apt $(lsb_release -sc) main | sudo tee /etc/apt/sources.list.d/gluster.list
+wget -O - http://download.gluster.org/pub/gluster/glusterfs/3.7/3.7.9/rsa.pub | apt-key add -
+echo deb http://download.gluster.org/pub/gluster/glusterfs/3.7/3.7.9/Debian/jessie/apt jessie main > /etc/apt/sources.list.d/gluster.list
 
 apt-get update
 
@@ -22,15 +23,18 @@ mkdir /FilesGluster
 
 gluster peer probe gluster2
 
-service glusterfs-server status
-
 gluster peer status
 
-gluster volume create file replica 2 transport tcp gluster1:/FilesGluster gluster2:/FilesGluster force
+gluster volume create /FilesGluster replica 2 transport tcp server1:/FilesGLuster server2.example.com:/FileGluster force
 
-gluster volume start file
+gluster volume start /FilesGluster
 
 gluster volume status
 
+netstat -tap | grep glusterfsd
 
+gluster volume info
 
+gluster volume set /FilesGLuster auth.allow 192.168.*
+
+gluster volume info
