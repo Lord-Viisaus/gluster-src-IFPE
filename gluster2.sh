@@ -1,12 +1,12 @@
 rm /etc/hostname
 echo gluster2 >>/etc/hostname
 
-echo 192.168.20.1 gluster1 >>/etc/hosts
-echo 192.168.20.2 gluster2 >>/etc/hosts
-echo 192.168.20.10 client1 >>/etc/hosts
-echo 192.168.20.11 client2 >>/etc/hosts
+echo 192.168.0.1 gluster1 >>/etc/hosts
+echo 192.168.0.2 gluster2 >>/etc/hosts
+echo 192.168.0.10 client1 >>/etc/hosts
+echo 192.168.0.11 client2 >>/etc/hosts
 
-echo '***** INTALANDO ******'
+echo '***** INSTALANDO ******'
 echo ' '
 
 apt update
@@ -19,16 +19,22 @@ apt-get update
 
 apt-get install glusterfs-server -y
 
-mkdir /FilesGluster
+#mkdir /FilesGluster
 
-gluster peer probe gluster1
+#gluster peer probe gluster1
 
-service glusterfs-server status
+#service glusterfs-server status
 
-gluster peer status
+#gluster peer status
 
-gluster volume create file replica 2 transport tcp gluster1:/FilesGluster gluster2:/FilesGluster force
+gluster volume create /FilesGluster replica 2 transport tcp gluster1:/FilesGluster gluster2:/FilesGluster force
 
-gluster volume start file
+gluster volume start /FilesGluster
+
+netstat -tap | grep glusterfsd
+
+service glusterfs-server restart
+
+netstat -tap | grep glusterfsd
 
 gluster volume status
