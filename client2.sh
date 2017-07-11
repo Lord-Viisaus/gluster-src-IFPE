@@ -20,7 +20,18 @@ apt-get update
 # Nas máquinas client1 e client2
 apt-get install glusterfs-client -y
 
-mkdir /Files
+mkdir /FilesGluster
 
-echo gluster1:/FilesGluster /Files glusterfs defaults,_netdev,backupvolfile-server=gluster2 0 0 >>/etc/fstab
-mount -a
+mount.glusterfs gluster1:/FilesGluster /FilesGLuster
+
+mount
+
+df -h
+
+echo gluster1:/FilesGluster /FilesGluster glusterfs defaults,_netdev 0 0 >>/etc/fstab
+
+reboot
+
+df -h
+
+mount
