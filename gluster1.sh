@@ -25,7 +25,7 @@ gluster peer probe gluster2
 
 gluster peer status
 
-gluster volume create /FilesGluster replica 2 transport tcp server1:/FilesGLuster server2.example.com:/FileGluster force
+gluster volume create /FilesGluster replica 2 transport tcp gluster1:/FilesGLuster gluster2:/FileGluster force
 
 gluster volume start /FilesGluster
 
