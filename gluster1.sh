@@ -21,20 +21,27 @@ apt-get install glusterfs-server -y
 
 mkdir /FilesGluster
 
+#permitindo o gluster2 ser gluster
 gluster peer probe gluster2
 
+#status do gluster
 gluster peer status
 
+#criando volume no diretorio /F...ter e replicando dando acesso a usar a porta tcp e transferir para o gluster2
 gluster volume create /FilesGluster replica 2 transport tcp gluster1:/FilesGLuster gluster2:/FileGluster force
 
+#iniciar volume
 gluster volume start /FilesGluster
 
 gluster volume status
 
+# verifica a saida e entrada do glusterfs na rede
 netstat -tap | grep glusterfsd
 
+#informação do gluster
 gluster volume info
 
+#permitindo determinado ip a acessar o volume
 gluster volume set /FilesGLuster auth.allow 192.168.*
 
 gluster volume info
